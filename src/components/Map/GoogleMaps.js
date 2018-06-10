@@ -1,7 +1,8 @@
 import loadScript from "scriptjs";
 
 class GoogleMaps {
-  constructor(element, markers = [], defaultConfig) {
+  constructor(apiKey, element, markers = [], defaultConfig) {
+    this.apiKey = apiKey;
     this.elt = element;
     this.googleMaps = null;
     this.map = null;
@@ -12,7 +13,7 @@ class GoogleMaps {
 
   load() {
     loadScript(
-      "https://maps.googleapis.com/maps/api/js?key=AIzaSyAyesbQMyKVVbBgKVi2g6VX7mop2z96jBo",
+      `https://maps.googleapis.com/maps/api/js?key=${this.apiKey}`,
       () => {
         this.googleMaps = window.google.maps;
 
