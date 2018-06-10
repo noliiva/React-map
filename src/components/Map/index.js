@@ -24,7 +24,7 @@ class Map extends React.Component {
       center: France,
       zoom: 6
     };
-    this.map = new GoogleMaps(elt, markers, config);
+    this.map = new GoogleMaps('API_KEY', elt, markers, config);
     this.map.load();
   }
 
