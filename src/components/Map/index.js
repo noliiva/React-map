@@ -15,23 +15,22 @@ class Map extends React.Component {
   }
 
   componentDidMount() {
-    const elt = ReactDOM.findDOMNode(this.mapRef.current);
-    const markers = React.Children.map(this.props.children, ({ props }) => {
-      const { lat, lng } = props;
-      return { position: { lat, lng } };
-    });
     const config = {
       center: France,
       zoom: 6
     };
-    this.map = new GoogleMaps('API_KEY', elt, markers, config);
-    this.map.load();
+    const mapRoot = ReactDOM.findDOMNode(this.mapRef.current);
+    this.map = new GoogleMaps(mapRoot, this.props.apiKey, config);
+    const markers = React.Children.map(this.props.children, child =>
+      React.cloneElement(child)
+    );
+    this.map.load(markers);
   }
 
   render() {
     return (
       <div style={{ height: "100%", width: "100%" }} ref={this.mapRef}>
-        Loading...
+        {this.props.children}
       </div>
     );
   }
